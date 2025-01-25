@@ -15,6 +15,12 @@ module.exports = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "instagram.fyvr4-1.fna.fbcdn.net",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

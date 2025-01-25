@@ -30,6 +30,16 @@ export const navbarLinksList: NavProps[] = [
     href: "/instagram",
     label: "Instagram",
   },
+
+  {
+    href: "/facebook",
+    label: "Facebook",
+  },
+
+  {
+    href: "/tiktok",
+    label: "Tiktok",
+  },
   {
     href: "/#pricing",
     label: "Pricing",
