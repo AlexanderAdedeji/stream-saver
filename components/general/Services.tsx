@@ -2,6 +2,7 @@
 import { MagnifierIcon, WalletIcon, ChartIcon } from "./Icons";
 import cubeLeg from "../../assets/cube-leg.png";
 import Image from "next/image";
+import { Download, Shield, Zap } from "lucide-react";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 interface ServiceProps {
@@ -12,22 +13,22 @@ interface ServiceProps {
 
 const serviceList: ServiceProps[] = [
   {
-    title: "Code Collaboration",
+    title: "High-Speed Downloads",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    icon: <ChartIcon />,
+      "Experience lightning-fast downloads with our optimized servers and advanced compression technology. Get your videos in seconds, not minutes.",
+    icon: <Zap className="w-12 h-12 text-primary" />,
   },
   {
-    title: "Project Management",
+    title: "Secure & Private",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    icon: <WalletIcon />,
+      "Your privacy is our priority. We use secure connections and don't store your downloaded content. Download with complete peace of mind.",
+    icon: <Shield className="w-12 h-12 text-primary" />,
   },
   {
-    title: "Task Automation",
+    title: "Smart Processing",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    icon: <MagnifierIcon />,
+      "Our intelligent system automatically detects the best quality, removes watermarks, and optimizes video format for your device.",
+    icon: <Download className="w-12 h-12 text-primary" />,
   },
 ];
 
