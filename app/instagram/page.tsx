@@ -33,12 +33,10 @@ import {
   ScanLine,
   Settings2,
 } from "lucide-react";
-
-
-
+import PlatformHero from "@/components/general/PlatformHero";
 
 interface Media {
-  url:string;
+  url: string;
   type: string;
 }
 interface IGPost {
@@ -56,7 +54,7 @@ interface WatermarkRemoval {
   intensity: "low" | "medium" | "high";
 }
 const InstagramPage = () => {
-  const [url, seturl] = useState("");
+  const [url, setUrl] = useState("");
   const [quality, setQuality] = useState("");
 
   const { mutate, isPending, data } = useMutation<any, any, any>({
@@ -81,7 +79,7 @@ const InstagramPage = () => {
     if (postInfo && postInfo.media && postInfo.media.length > 0) {
       const currentImage = postInfo.media[activeSlide];
       if (!currentImage) return;
-  
+
       const link = document.createElement("a");
       link.href = currentImage.url;
       link.download = `image-${activeSlide + 1}.jpg`;
@@ -90,7 +88,7 @@ const InstagramPage = () => {
       document.body.removeChild(link);
     }
   };
-  
+
   const handleDownloadAllImages = () => {
     if (postInfo && postInfo.media && postInfo.media.length > 0) {
       postInfo.media.forEach((mediaItem, index) => {
@@ -103,7 +101,7 @@ const InstagramPage = () => {
       });
     }
   };
-  
+
   const [activeSlide, setActiveSlide] = useState(0);
   const [postInfo, setPostInfo] = useState<IGPost | null>(null);
   const [watermarkRemoval, setWatermarkRemoval] = useState<WatermarkRemoval>({
@@ -116,50 +114,21 @@ const InstagramPage = () => {
       <header className="w-full bg-white border-b sticky top-0 z-50">
         {/* ... similar header as YouTube page ... */}
       </header>
-      <section className="bg-gradient-to-b from-pink-50 to-white py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center justify-center mb-8">
-            <Instagram className="h-12 w-12 text-pink-600 mr-4" />
-            <h1 className="text-4xl font-bold text-gray-900">
-              Instagram Downloader
-            </h1>
-          </div>
-          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
-            Download photos, carousels, and reels from Instagram. Save your
-            favorite content in high quality!
-          </p>
-        </div>
-      </section>
+ <PlatformHero icon={<Instagram className="h-12 w-12 text-pink-600 mr-4" />} title={"Instagram Downloader "} 
+ description={`Download photos, carousels, and reels from Instagram. Save your
+        favorite content in high quality!`} />
       <section className="py-8">
         <div className="max-w-4xl mx-auto px-4">
           <form
             onSubmit={handleGetInfo}
             className="bg-white rounded-xl shadow-sm p-6"
           >
-            <div className="flex gap-2">
-              <div className="flex-1">
-                <input
-                  type="text"
-                  placeholder="Paste Instagram post/reel URL here..."
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500"
-                  value={url}
-                  onChange={(e) => seturl(e.target.value)}
-                  disabled={isPending}
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={!url}
-                className="px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isPending ? (
-                  <Loader2 className="animate-spin" size={20} />
-                ) : (
-                  <SearchIcon size={20} />
-                )}
-                {isPending ? "Getting Info..." : "Get Info"}
-              </button>
-            </div>
+            <Search
+              searchItem={url}
+              setSearchItem={setUrl}
+              isSearching={isPending}
+              placeholder={"Paste Instagram post/reel URL here..."}
+            />
           </form>
         </div>
       </section>
@@ -343,16 +312,18 @@ const InstagramPage = () => {
                 </h3>
                 {postInfo.type === "carousel" ? (
                   <div className="space-y-3">
-                    <button 
-                    onClick={handleDownloadAllImages}
-                    className="w-full px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 flex items-center justify-center gap-2">
+                    <button
+                      onClick={handleDownloadAllImages}
+                      className="w-full px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 flex items-center justify-center gap-2"
+                    >
                       <Download size={20} />
                       Download All Images{" "}
                       {watermarkRemoval.enabled && "(No Watermark)"}
                     </button>
-                    <button 
-                       onClick={handleDownloadCurrentImage}
-                    className="w-full px-6 py-3 border border-pink-600 text-pink-600 rounded-lg hover:bg-pink-50 flex items-center justify-center gap-2">
+                    <button
+                      onClick={handleDownloadCurrentImage}
+                      className="w-full px-6 py-3 border border-pink-600 text-pink-600 rounded-lg hover:bg-pink-50 flex items-center justify-center gap-2"
+                    >
                       <Download size={20} />
                       Download Current Image{" "}
                       {watermarkRemoval.enabled && "(No Watermark)"}
