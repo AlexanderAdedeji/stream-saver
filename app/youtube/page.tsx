@@ -1,6 +1,6 @@
 "use client";
 
-import { youtubeService } from "@/adapters/youtube";
+import { YoutubeDownloadParams, youtubeService } from "@/adapters/youtube";
 
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
@@ -90,14 +90,33 @@ const YoutubePage = () => {
     onSuccess: (data) => setVideoInfo(data),
   });
 
-  // const {
-  //   mutate: download,
-  //   isPending: downloadPending,
-  //   data: video,
-  // } = useMutation({
-  //   mutationFn: () => youtubeService.downloadYotubeVideo({ url, quality }),
-  //   onSuccess: (data) => toast.success("Download started!"),
-  // });
+  const { mutate: download, isPending: isDownloading } = useMutation({
+    mutationFn: (params: YoutubeDownloadParams) => 
+        youtubeService.downloadYoutubeVideo(params),
+    onSuccess: (data, variables) => {
+        toast.success(`Download started: ${data.filename}`);
+        setDownloadHistory(prev => [
+            {
+                id: Date.now().toString(),
+                title: videoInfo?.title || "",
+                thumbnail: videoInfo?.thumbnail || "",
+                quality: variables.quality,
+                format: 'MP4',
+                downloadedAt: new Date().toLocaleString()
+            },
+            ...prev
+        ]);
+    }
+});
+
+const handleDownload = () => {
+    if (!selectedQuality || !videoInfo) return;
+    
+    download({
+        url: url,
+        quality: selectedQuality
+    });
+};
 
   const handleGetInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -114,21 +133,21 @@ const YoutubePage = () => {
     }
   );
 
-  const handleDownload = () => {
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 3000);
-    setDownloadHistory((prev) => [
-      {
-        id: Date.now().toString(),
-        title: videoInfo?.title || "",
-        thumbnail: videoInfo?.thumbnail || "",
-        quality: selectedQuality,
-        format: downloadFormat === "video" ? "MP4" : "MP3",
-        downloadedAt: "Just now",
-      },
-      ...prev,
-    ]);
-  };
+  // const handleDownload = () => {
+  //   setShowSuccess(true);
+  //   setTimeout(() => setShowSuccess(false), 3000);
+  //   setDownloadHistory((prev) => [
+  //     {
+  //       id: Date.now().toString(),
+  //       title: videoInfo?.title || "",
+  //       thumbnail: videoInfo?.thumbnail || "",
+  //       quality: selectedQuality,
+  //       format: downloadFormat === "video" ? "MP4" : "MP3",
+  //       downloadedAt: "Just now",
+  //     },
+  //     ...prev,
+  //   ]);
+  // };
   return (
     <div className="w-full min-h-screen bg-gray-50">
       <PlatformHero
