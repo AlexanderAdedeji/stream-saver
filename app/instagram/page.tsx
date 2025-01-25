@@ -40,7 +40,7 @@ interface Media {
   type: string;
 }
 interface IGPost {
-  type: "image" | "carousel" | "reel";
+  type: "image" | "carousel" | "reel" | "video";
   media: Media[];
   thumbnail?: string;
   caption: string;
@@ -75,31 +75,23 @@ const InstagramPage = () => {
     e.preventDefault();
     mutate(url);
   };
-  const handleDownloadCurrentImage = () => {
-    if (postInfo && postInfo.media && postInfo.media.length > 0) {
-      const currentImage = postInfo.media[activeSlide];
-      if (!currentImage) return;
+  // Handle downloads in your component
+  const handleDownloadCurrent = () => {
+    if (!postInfo) return;
 
-      const link = document.createElement("a");
-      link.href = currentImage.url;
-      link.download = `image-${activeSlide + 1}.jpg`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+    instagramService
+      .downloadMedia(url, activeSlide)
+      .catch(() => toast.error("Failed to start download"));
   };
 
-  const handleDownloadAllImages = () => {
-    if (postInfo && postInfo.media && postInfo.media.length > 0) {
-      postInfo.media.forEach((mediaItem, index) => {
-        const link = document.createElement("a");
-        link.href = mediaItem.url;
-        link.download = `image-${index + 1}.jpg`; // Default filename
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-    }
+  const handleDownloadAll = () => {
+    if (!postInfo) return;
+
+    postInfo.media.forEach((_, index) => {
+      instagramService
+        .downloadMedia(url, index)
+        .catch(() => toast.error(`Failed to download item ${index + 1}`));
+    });
   };
 
   const [activeSlide, setActiveSlide] = useState(0);
@@ -109,16 +101,18 @@ const InstagramPage = () => {
     mode: "auto",
     intensity: "medium",
   });
+
+  console.log(activeSlide);
+
   return (
     <div className="w-full min-h-screen bg-gray-50">
-      <header className="w-full bg-white border-b sticky top-0 z-50">
-        {/* ... similar header as YouTube page ... */}
-      </header>
- <PlatformHero icon={<Instagram className="h-12 w-12 text-pink-600 mr-4" />} title={"Instagram Downloader "} 
- description={`Download photos, carousels, and reels from Instagram. Save your
-        favorite content in high quality!`} 
+      <PlatformHero
+        icon={<Instagram className="h-12 w-12 text-pink-600 mr-4" />}
+        title={"Instagram Downloader "}
+        description={`Download photos, carousels, and reels from Instagram. Save your
+        favorite content in high quality!`}
         className="bg-gradient-to-b from-pink-50 to-white py-16"
-        />
+      />
       <section className="py-8">
         <div className="max-w-4xl mx-auto px-4">
           <form
@@ -154,15 +148,23 @@ const InstagramPage = () => {
                 </div>
               </div>
               <div className="relative">
-                {postInfo.type === "carousel" && (
+                {postInfo.type === "carousel" ? (
                   <div className="relative aspect-square">
-                    <Image
-                      src={postInfo.media![activeSlide].url}
-                      alt={`Slide ${activeSlide + 1}`}
-                      className="w-full h-full object-cover"
-                      width={100}
-                      height={100}
-                    />
+                    {postInfo.media[activeSlide].type === "video" ? (
+                      <video
+                        src={postInfo.media[activeSlide].url}
+                        controls
+                        className="w-full h-full object-contain"
+                      />
+                    ) : (
+                      <Image
+                        src={postInfo.media[activeSlide].url}
+                        alt={`Slide ${activeSlide + 1}`}
+                        className="w-full h-full object-cover"
+                        width={100}
+                        height={100}
+                      />
+                    )}
                     {postInfo.media!.length > 1 && (
                       <>
                         <button
@@ -203,6 +205,21 @@ const InstagramPage = () => {
 
                     <span>{postInfo.caption}</span>
                   </div>
+                ) : // Single media display
+                postInfo.type === "video" ? (
+                  <video
+                    src={postInfo.media[0].url}
+                    controls
+                    className="object-contain"
+                  />
+                ) : (
+                  <Image
+                    src={postInfo.media[0].url}
+                    alt="Instagram post"
+                    className="w-full h-full object-cover"
+                    width={200}
+                    height={200}
+                  />
                 )}
               </div>
               <div className="p-6 border-t">
@@ -315,7 +332,7 @@ const InstagramPage = () => {
                 {postInfo.type === "carousel" ? (
                   <div className="space-y-3">
                     <button
-                      onClick={handleDownloadAllImages}
+                      onClick={handleDownloadAll}
                       className="w-full px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 flex items-center justify-center gap-2"
                     >
                       <Download size={20} />
@@ -323,11 +340,11 @@ const InstagramPage = () => {
                       {watermarkRemoval.enabled && "(No Watermark)"}
                     </button>
                     <button
-                      onClick={handleDownloadCurrentImage}
+                      onClick={handleDownloadCurrent}
                       className="w-full px-6 py-3 border border-pink-600 text-pink-600 rounded-lg hover:bg-pink-50 flex items-center justify-center gap-2"
                     >
                       <Download size={20} />
-                      Download Current Image{" "}
+                      Download Current { postInfo?.media[activeSlide].type == "image" ? "Image" : "Video" }
                       {watermarkRemoval.enabled && "(No Watermark)"}
                     </button>
                   </div>
