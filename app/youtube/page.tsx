@@ -68,7 +68,6 @@ interface WatermarkSettings {
 const YoutubePage = () => {
   const [url, setUrl] = useState("");
   const [quality, setQuality] = useState("");
-  const [loading, setLoading] = useState(false);
   const [videoInfo, setVideoInfo] = useState<VideoMetadata | null>(null);
   const [selectedQuality, setSelectedQuality] = useState("");
   const [downloadFormat, setDownloadFormat] = useState<"video" | "audio">(
@@ -91,14 +90,14 @@ const YoutubePage = () => {
     onSuccess: (data) => setVideoInfo(data),
   });
 
-  const {
-    mutate: download,
-    isPending: downloadPending,
-    data: video,
-  } = useMutation({
-    mutationFn: () => youtubeService.downloadYotubeVideo({ url, quality }),
-    onSuccess: (data) => toast.success("Download started!"),
-  });
+  // const {
+  //   mutate: download,
+  //   isPending: downloadPending,
+  //   data: video,
+  // } = useMutation({
+  //   mutationFn: () => youtubeService.downloadYotubeVideo({ url, quality }),
+  //   onSuccess: (data) => toast.success("Download started!"),
+  // });
 
   const handleGetInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -133,7 +132,7 @@ const YoutubePage = () => {
   return (
     <div className="w-full min-h-screen bg-gray-50">
       <PlatformHero
-      className="bg-red-50 py-16"
+        className="bg-red-50 py-16"
         icon={<Youtube className="h-12 w-12 text-red-600 mr-4" />}
         title={"  YouTube Video Downloader "}
         description={`Download any YouTube video in HD quality. Just paste the URL and get
@@ -168,37 +167,13 @@ const YoutubePage = () => {
             onSubmit={handleGetInfo}
             className="bg-white rounded-xl shadow-sm p-6"
           >
-
-<Search
+            <Search
               searchItem={url}
               setSearchItem={setUrl}
               isSearching={isPending}
               placeholder={"Paste YouTube URL here..."}
             />
-            {/* <div className="flex gap-2">
-              <div className="flex-1">
-                <input
-                  type="text"
-                  placeholder=""
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  disabled={loading}
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={!url || loading}
-                className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {loading ? (
-                  <Loader2 className="animate-spin" size={20} />
-                ) : (
-                  <SearchIcon size={20} />
-                )}
-                {loading ? "Getting Info..." : "Get Info"}
-              </button>
-            </div> */}
+            
           </form>
         </div>
       </section>

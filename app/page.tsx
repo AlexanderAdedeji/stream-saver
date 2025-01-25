@@ -11,15 +11,15 @@ import { Services } from "@/components/general/Services";
 export default function Home() {
   return (
     <>
-      {/* <Hero />
+     <Hero />
       <About />
-      <HowItWorks />
+       <HowItWorks />
       <Features />
       <Services />
       <Cta />
       <Pricing />
       <Newsletter />
-      <FAQ /> */}
+      <FAQ />
     </>
   );
 }

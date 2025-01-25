@@ -4,7 +4,7 @@ import React from 'react'
 
 
 interface PlatformHeroInterface {
-    icon:string;
+    icon: React.ReactNode; 
     title: string;
     description: string;
     className:string;
