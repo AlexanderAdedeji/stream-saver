@@ -15,35 +15,35 @@ interface FeatureProps {
 
 const features: FeatureProps[] = [
   {
-    title: "Responsive Design",
+    title: "Multi-Platform Support",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
+"Download videos from all major social platforms including YouTube, Instagram, TikTok, and Facebook. One tool for all your video downloading needs.",
     image: image4,
   },
   {
-    title: "Intuitive user interface",
+    title: "Advanced Watermark Removal",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
+    "Our AI-powered watermark removal technology ensures clean, professional-looking videos. Choose between automatic detection or precise manual control.",
     image: image3,
   },
   {
-    title: "AI-Powered insights",
+    title: "Premium Quality Downloads",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
+    "Get the highest quality downloads available, up to 4K resolution. Multiple format options including MP4 video and MP3 audio conversion.",
     image: image,
   },
 ];
 
 const featureList: string[] = [
-  "Dark/Light theme",
-  "Reviews",
-  "Features",
-  "Pricing",
-  "Contact form",
-  "Our team",
-  "Responsive design",
-  "Newsletter",
-  "Minimalist",
+  "4K Quality",
+  "Batch Downloads",
+  "MP3 Conversion",
+  "No Watermarks",
+  "Multiple Formats",
+  "Fast Downloads",
+  "Cloud Storage",
+  "Progress Tracking",
+  "Browser Extension",
 ];
 
 export const Features = () => {
