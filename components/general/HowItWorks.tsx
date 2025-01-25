@@ -1,4 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from "./Icons";
 
 interface FeatureProps {

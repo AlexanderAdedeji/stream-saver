@@ -14,13 +14,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Search from "@/components/general/Search";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const Youtube = () => {
   const [url, seturl] = useState("");
+  const [quality, setQuality] = useState("");
 
   const { mutate, isPending, data } = useMutation<any, any, any>({
     mutationFn: () => youtubeService.searchYoutubeVideo(url),
     onSuccess: (data) => console.log(data),
+  });
+
+  const {
+    mutate: download,
+    isPending: downloadPending,
+    data: video,
+  } = useMutation({
+    mutationFn: () => youtubeService.downloadYotubeVideo({ url, quality }),
+    onSuccess: (data) => toast.success("Download started!"),
   });
 
   const searchYotubeLine = () => {
@@ -50,16 +62,24 @@ const Youtube = () => {
 
           <p className="">{data?.duration}</p>
 
-          <Select>
+          <Select
+            onValueChange={(e) => {
+              setQuality(e);
+            }}
+          >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Theme" />
+              <SelectValue placeholder="video quality" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
+              {data?.video_qualities.map((video: string) => (
+                <SelectItem key={video} value={video}>
+                  {video}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
+
+          <Button onClick={() => download()}>Download</Button>
         </div>
       ) : null}
     </div>

@@ -1,4 +1,4 @@
-import { Badge } from "./ui/badge";
+
 import {
   Card,
   CardContent,
@@ -10,6 +10,7 @@ import image from "../assets/growth.png";
 import image3 from "../assets/reflecting.png";
 import image4 from "../assets/looking-ahead.png";
 import Image, { StaticImageData } from "next/image";
+import { Badge } from "../ui/badge";
 
 interface FeatureProps {
   title: string;

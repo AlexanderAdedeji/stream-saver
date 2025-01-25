@@ -5,13 +5,15 @@ import {
 } from "@/components/ui/navigation-menu";
 
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { buttonVariants } from "./ui/button";
+
 import { ModeToggle } from "./mode-toggle";
 import { LogoIcon } from "./Icons";
-import { MobileNavFragment } from "@/components/MobileNavFragment";
+
 import { navbarLinksList, NavProps } from "@/config/nav";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
+import { buttonVariants } from "../ui/button";
+import { MobileNavFragment } from "./MobileNavFragment";
 const { title } = siteConfig;
 
 export const Navbar = () => {

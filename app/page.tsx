@@ -1,19 +1,17 @@
-import { About } from "@/components/About";
-import { Cta } from "@/components/Cta";
-import { FAQ } from "@/components/FAQ";
-import { Features } from "@/components/Features";
-
-import { Hero } from "@/components/Hero";
-import { HowItWorks } from "@/components/HowItWorks";
-import { Newsletter } from "@/components/Newsletter";
-import { Pricing } from "@/components/Pricing";
-
-import { Services } from "@/components/Services";
+import { About } from "@/components/general/About";
+import { Cta } from "@/components/general/Cta";
+import { FAQ } from "@/components/general/FAQ";
+import { Features } from "@/components/general/Features";
+import { Hero } from "@/components/general/Hero";
+import { HowItWorks } from "@/components/general/HowItWorks";
+import { Newsletter } from "@/components/general/Newsletter";
+import { Pricing } from "@/components/general/Pricing";
+import { Services } from "@/components/general/Services";
 
 export default function Home() {
   return (
     <>
-      <Hero />
+      {/* <Hero />
       <About />
       <HowItWorks />
       <Features />
@@ -21,7 +19,7 @@ export default function Home() {
       <Cta />
       <Pricing />
       <Newsletter />
-      <FAQ />
+      <FAQ /> */}
     </>
   );
 }
