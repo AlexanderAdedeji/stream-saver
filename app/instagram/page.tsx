@@ -71,7 +71,7 @@ const InstagramPage = () => {
   //   onSuccess: (data) => toast.success("Download started!"),
   // });
 
-  const handleGetInfo = (e) => {
+  const handleGetInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate(url);
   };
@@ -116,7 +116,9 @@ const InstagramPage = () => {
       </header>
  <PlatformHero icon={<Instagram className="h-12 w-12 text-pink-600 mr-4" />} title={"Instagram Downloader "} 
  description={`Download photos, carousels, and reels from Instagram. Save your
-        favorite content in high quality!`} />
+        favorite content in high quality!`} 
+        className="bg-gradient-to-b from-pink-50 to-white py-16"
+        />
       <section className="py-8">
         <div className="max-w-4xl mx-auto px-4">
           <form

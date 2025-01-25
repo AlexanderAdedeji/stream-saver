@@ -51,12 +51,12 @@ export const Navbar = () => {
 
           <div className="hidden md:flex gap-2">
             <Link
-              href="https://github.com/leoMirandaa/shadcn-landing-page.git"
+              href=""
               target="_blank"
               className={`border ${buttonVariants({ variant: "secondary" })}`}
             >
               <GitHubLogoIcon className="mr-2 w-5 h-5" />
-              Github
+            Get Started
             </Link>
 
             <ModeToggle />

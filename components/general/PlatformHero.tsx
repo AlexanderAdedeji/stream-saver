@@ -7,13 +7,14 @@ interface PlatformHeroInterface {
     icon:string;
     title: string;
     description: string;
+    className:string;
 }
 
 
 
-const PlatformHero = ({description, icon, title}: PlatformHeroInterface) => {
+const PlatformHero = ({description, icon, title, className}: PlatformHeroInterface) => {
   return (
-    <section className="bg-gradient-to-b from-pink-50 to-white py-16">
+    <section className={className}>
     <div className="max-w-6xl mx-auto px-4">
       <div className="flex items-center justify-center mb-8">
 

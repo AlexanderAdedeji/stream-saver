@@ -100,7 +100,7 @@ const YoutubePage = () => {
     onSuccess: (data) => toast.success("Download started!"),
   });
 
-  const handleGetInfo = (e) => {
+  const handleGetInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate(url);
   };
@@ -133,6 +133,7 @@ const YoutubePage = () => {
   return (
     <div className="w-full min-h-screen bg-gray-50">
       <PlatformHero
+      className="bg-red-50 py-16"
         icon={<Youtube className="h-12 w-12 text-red-600 mr-4" />}
         title={"  YouTube Video Downloader "}
         description={`Download any YouTube video in HD quality. Just paste the URL and get

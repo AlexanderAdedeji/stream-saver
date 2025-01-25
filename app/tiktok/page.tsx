@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Search,
+  Search as SearchIcon,
   Download,
   Music,
   Heart,
@@ -15,6 +15,8 @@ import {
   MousePointer,
   ScanLine,
 } from "lucide-react";
+import Search from "@/components/general/Search";
+import PlatformHero from "@/components/general/PlatformHero";
 interface TikTokVideo {
   title: string;
   thumbnail: string;
@@ -93,36 +95,25 @@ const TikTokPage = () => {
   };
   return (
     <div className="w-full min-h-screen bg-gray-50">
-      <header className="w-full bg-white border-b sticky top-0 z-50">
-        {/* Similar header as other pages */}
-      </header>
-      <section className="bg-gradient-to-b from-pink-50 to-white py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center justify-center mb-8">
-            <svg className="h-12 w-12 text-black mr-4" viewBox="0 0 24 24">
-              {/* TikTok logo */}
+
+        <PlatformHero icon={ <svg className="h-12 w-12 text-black mr-4" viewBox="0 0 24 24">
+            
               <path
                 fill="currentColor"
                 d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002.001a2.895 2.895 0 0 1 3.183-4.51v-3.5a6.329 6.329 0 0 0-5.394 10.692 6.33 6.33 0 0 0 10.857-4.424V8.687a8.182 8.182 0 0 0 4.773 1.526V6.79a4.831 4.831 0 0 1-1.003-.104z"
               />
-            </svg>
-            <h1 className="text-4xl font-bold text-gray-900">
-              TikTok Downloader
-            </h1>
-          </div>
-          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
-            Download TikTok videos without watermark, extract music, and save
-            your favorite content in HD quality!
-          </p>
-        </div>
-      </section>
+            </svg>} title={" TikTok Downloader"} description={`Download TikTok videos without watermark, extract music, and save
+            your favorite content in HD quality!`} className={"bg-gradient-to-b from-pink-50 to-white py-16"}/>
+  
       <section className="py-8">
         <div className="max-w-4xl mx-auto px-4">
           <form
             onSubmit={handleGetInfo}
             className="bg-white rounded-xl shadow-sm p-6"
           >
-            <div className="flex gap-2">
+
+            <Search searchItem={url} setSearchItem={setUrl } isSearching={false}  placeholder="Paste TikTok video URL here..."/>
+            {/* <div className="flex gap-2">
               <div className="flex-1">
                 <input
                   type="text"
@@ -145,7 +136,7 @@ const TikTokPage = () => {
                 )}
                 {loading ? "Getting Info..." : "Get Info"}
               </button>
-            </div>
+            </div> */}
           </form>
         </div>
       </section>

@@ -18,6 +18,7 @@ import {
   MousePointer,
   ScanLine,
 } from "lucide-react";
+import PlatformHero from "@/components/general/PlatformHero";
 interface FacebookContent {
   type: "video" | "reel";
   title: string;
@@ -86,23 +87,21 @@ const FacebookPage =() => {
   };
   return (
     <div className="w-full min-h-screen bg-gray-50">
-      <header className="w-full bg-white border-b sticky top-0 z-50">
-        {/* Similar header as other pages */}
-      </header>
-      <section className="bg-gradient-to-b from-blue-50 to-white py-16">
+<PlatformHero className="bg-gradient-to-b from-blue-50 to-white py-16" icon={ <Facebook className="h-12 w-12 text-blue-600 mr-4" />} title={"Facebook Video Downloader"} description={`Download Facebook videos, reels, and stories in HD quality. Works
+            with both public and private content!`}/>
+      {/* <section className="bg-gradient-to-b from-blue-50 to-white py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-center mb-8">
-            <Facebook className="h-12 w-12 text-blue-600 mr-4" />
+           
             <h1 className="text-4xl font-bold text-gray-900">
-              Facebook Video Downloader
+          
             </h1>
           </div>
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
-            Download Facebook videos, reels, and stories in HD quality. Works
-            with both public and private content!
+     
           </p>
         </div>
-      </section>
+      </section> */}
       <section className="py-8">
         <div className="max-w-4xl mx-auto px-4">
           <form
