@@ -22,7 +22,7 @@
 
 
 admin-frontend.txt
-
+merge.js
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -91,32 +91,32 @@ const YoutubePage = () => {
   });
 
   const { mutate: download, isPending: isDownloading } = useMutation({
-    mutationFn: (params: YoutubeDownloadParams) => 
-        youtubeService.downloadYoutubeVideo(params),
+    mutationFn: (params: YoutubeDownloadParams) =>
+      youtubeService.downloadYoutubeVideo(params),
     onSuccess: (data, variables) => {
-        toast.success(`Download started: ${data.filename}`);
-        setDownloadHistory(prev => [
-            {
-                id: Date.now().toString(),
-                title: videoInfo?.title || "",
-                thumbnail: videoInfo?.thumbnail || "",
-                quality: variables.quality,
-                format: 'MP4',
-                downloadedAt: new Date().toLocaleString()
-            },
-            ...prev
-        ]);
-    }
-});
+      toast.success(`Download started: ${data.filename}`);
+      setDownloadHistory((prev) => [
+        {
+          id: Date.now().toString(),
+          title: videoInfo?.title || "",
+          thumbnail: videoInfo?.thumbnail || "",
+          quality: variables.quality,
+          format: "MP4",
+          downloadedAt: new Date().toLocaleString(),
+        },
+        ...prev,
+      ]);
+    },
+  });
 
-const handleDownload = () => {
+  const handleDownload = () => {
     if (!selectedQuality || !videoInfo) return;
-    
+
     download({
-        url: url,
-        quality: selectedQuality
+      url: url,
+      quality: selectedQuality,
     });
-};
+  };
 
   const handleGetInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -192,7 +192,6 @@ const handleDownload = () => {
               isSearching={isPending}
               placeholder={"Paste YouTube URL here..."}
             />
-            
           </form>
         </div>
       </section>
@@ -388,12 +387,19 @@ const handleDownload = () => {
                 <div className="mt-6">
                   <button
                     onClick={handleDownload}
-                    disabled={!selectedQuality}
-                    className="w-full px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={isDownloading || !selectedQuality}
+                    className={`w-full px-6 py-3 bg-red-600 text-white rounded-lg flex items-center justify-center gap-2 ${
+                      isDownloading
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:bg-red-700"
+                    }`}
                   >
-                    <Download size={20} />
-                    Download {downloadFormat === "video" ? "Video" : "MP3"}
-                    {watermarkSettings.enabled && " (No Watermark)"}
+                    {isDownloading ? (
+                      <Loader2 className="animate-spin" size={20} />
+                    ) : (
+                      <Download size={20} />
+                    )}
+                    Download Video
                   </button>
                 </div>
               </div>

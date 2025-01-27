@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import { instagramService } from "@/adapters/instagram";
 import { toast } from "sonner";
-import { Instagram, ChevronLeft, ChevronRight, Download, Loader2 } from "lucide-react";
+import { Instagram, ChevronLeft, ChevronRight, Download, Loader2, ScanLine, MousePointer } from "lucide-react";
 import PlatformHero from "@/components/general/PlatformHero";
 import Search from "@/components/general/Search";
 
@@ -21,6 +21,14 @@ interface IGPost {
   like_count: string;
   username: string;
   user_avatar: string;
+}
+
+
+interface WatermarkSettings {
+  enabled: boolean;
+  mode: "auto" | "manual";
+  algorithm: "basic" | "advanced";
+  position: "corner" | "center" | "custom";
 }
 
 const InstagramPage = () => {
@@ -39,6 +47,16 @@ const InstagramPage = () => {
     e.preventDefault();
     mutate(url);
   };
+
+
+    const [watermarkSettings, setWatermarkSettings] = useState<WatermarkSettings>(
+      {
+        enabled: false,
+        mode: "auto",
+        algorithm: "basic",
+        position: "corner",
+      }
+    );
 
   const handleDownloadCurrent = async () => {
     if (!postInfo) return;
@@ -174,7 +192,124 @@ const InstagramPage = () => {
                   />
                 )}
               </div>
-
+              <div className="mt-6 border-t pt-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-medium text-gray-900">
+                      Watermark Removal
+                    </h3>
+                    <button
+                      onClick={() =>
+                        setWatermarkSettings((prev) => ({
+                          ...prev,
+                          enabled: !prev.enabled,
+                        }))
+                      }
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                        watermarkSettings.enabled ? "bg-red-600" : "bg-gray-200"
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                          watermarkSettings.enabled
+                            ? "translate-x-6"
+                            : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                  {watermarkSettings.enabled && (
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-2 gap-3">
+                        <button
+                          onClick={() =>
+                            setWatermarkSettings((prev) => ({
+                              ...prev,
+                              mode: "auto",
+                            }))
+                          }
+                          className={`flex items-center justify-center gap-2 p-3 rounded-lg border ${
+                            watermarkSettings.mode === "auto"
+                              ? "border-red-500 bg-red-50 text-red-600"
+                              : "border-gray-200 hover:border-red-200"
+                          }`}
+                        >
+                          <ScanLine size={18} />
+                          Auto Detect
+                        </button>
+                        <button
+                          onClick={() =>
+                            setWatermarkSettings((prev) => ({
+                              ...prev,
+                              mode: "manual",
+                            }))
+                          }
+                          className={`flex items-center justify-center gap-2 p-3 rounded-lg border ${
+                            watermarkSettings.mode === "manual"
+                              ? "border-red-500 bg-red-50 text-red-600"
+                              : "border-gray-200 hover:border-red-200"
+                          }`}
+                        >
+                          <MousePointer size={18} />
+                          Manual Select
+                        </button>
+                      </div>
+                      <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium text-gray-700">
+                            Removal Algorithm
+                          </span>
+                          <select
+                            value={watermarkSettings.algorithm}
+                            onChange={(e) =>
+                              setWatermarkSettings((prev) => ({
+                                ...prev,
+                                algorithm: e.target.value as
+                                  | "basic"
+                                  | "advanced",
+                              }))
+                            }
+                            className="text-sm border rounded-md px-2 py-1"
+                          >
+                            <option value="basic">Basic (Faster)</option>
+                            <option value="advanced">
+                              Advanced (Better Quality)
+                            </option>
+                          </select>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium text-gray-700">
+                            Watermark Position
+                          </span>
+                          <select
+                            value={watermarkSettings.position}
+                            onChange={(e) =>
+                              setWatermarkSettings((prev) => ({
+                                ...prev,
+                                position: e.target.value as
+                                  | "corner"
+                                  | "center"
+                                  | "custom",
+                              }))
+                            }
+                            className="text-sm border rounded-md px-2 py-1"
+                          >
+                            <option value="corner">Corner</option>
+                            <option value="center">Center</option>
+                            <option value="custom">Custom</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <p className="text-sm text-yellow-800">
+                          <strong>Note:</strong> Watermark removal quality may
+                          vary depending on the video quality and watermark
+                          type. Advanced algorithm provides better results but
+                          takes longer to process.
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
               <div className="p-6">
                 <h3 className="font-medium text-gray-900 mb-4">
                   Download Options:
