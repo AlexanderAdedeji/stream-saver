@@ -20,6 +20,9 @@
 .DS_Store
 *.pem
 
+
+admin-frontend.txt
+
 # debug
 npm-debug.log*
 yarn-debug.log*
