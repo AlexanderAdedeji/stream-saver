@@ -1,4 +1,3 @@
-
 import { HeroCards } from "./HeroCards";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
@@ -17,7 +16,7 @@ export const Hero = () => {
           </h1>{" "}
           <h2 className="inline">
             <span className="inline bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] text-transparent bg-clip-text">
-           content lovers and creators
+              content lovers and creators
             </span>{" "}
           </h2>
         </main>
@@ -31,14 +30,12 @@ export const Hero = () => {
           <Button className="w-full md:w-1/3">Get Started</Button>
 
           <Link
-            href="https://github.com/leoMirandaa/shadcn-landing-page.git"
-            target="_blank"
+            href="#how-it-works"
             className={`w-full md:w-1/3 ${buttonVariants({
               variant: "outline",
             })}`}
           >
-            Read the Docs
-            <GitHubLogoIcon className="ml-2 w-5 h-5" />
+            How it Works
           </Link>
         </div>
       </div>
