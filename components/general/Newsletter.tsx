@@ -22,7 +22,7 @@ export const Newsletter = () => {
           </span>
         </h3>
         <p className="text-xl text-muted-foreground text-center mt-4 mb-8">
-          Lorem ipsum dolor sit amet consectetur.
+        Stay ahead with updates, exclusive features, and content-saving hacks.
         </p>
 
         <form
