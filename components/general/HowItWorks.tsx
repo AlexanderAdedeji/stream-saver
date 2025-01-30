@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from "./Icons";
 
@@ -11,27 +10,27 @@ interface FeatureProps {
 const features: FeatureProps[] = [
   {
     icon: <MedalIcon />,
-    title: "Accesibility",
+    title: "Accessibility",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+      "StreamSaver is built so anyone—on mobile, desktop, or tablet—can quickly save videos or images. No complex steps, no special logins, just a seamless download process for all.",
   },
   {
     icon: <MapIcon />,
     title: "Community",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+      "Our user community drives continuous improvements. Share ideas, discover trending downloads, and connect with others who love saving and repurposing memorable online content.",
   },
   {
     icon: <PlaneIcon />,
     title: "Scalability",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+      "Whether you’re saving one video or managing a large batch, StreamSaver scales effortlessly. From TikTok shorts to 4K YouTube reels, we handle it all without slowing down.",
   },
   {
     icon: <GiftIcon />,
     title: "Gamification",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+      "We reward creativity by encouraging users to repurpose their saved content. Future updates will introduce badges and achievements for active downloaders and contributors.",
   },
 ];
 
@@ -46,8 +45,8 @@ export const HowItWorks = () => {
         Step-by-Step Guide
       </h2>
       <p className="md:w-3/4 mx-auto mt-4 mb-8 text-xl text-muted-foreground">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis
-        dolor pariatur sit!
+        Discover how easy it is to download, manage, and share your favorite
+        videos or images from any social platform using StreamSaver.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
