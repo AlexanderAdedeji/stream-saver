@@ -16,7 +16,6 @@ import Search from "@/components/general/Search";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {
   Youtube,
   Search as SearchIcon,
