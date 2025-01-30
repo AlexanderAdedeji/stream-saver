@@ -1,41 +1,4 @@
-// import { toast } from "sonner";
-// import { ApiNoAuth } from "..";
 
-
-
-
-// const searchInstagramVideo = async (url: string) => {
-//     try {
-//         const { data } = await ApiNoAuth.get(`/instagram/metadata?url=${url}`)
-//         console.log(data)
-//         return data
-//     }
-//     catch (error) {
-//         console.error(error);
-//     }
-// }
-
-
-
-// const downloadMedia = async (url: string, filename: string) => {
-//     try {
-//       const response = await fetch(`/api/instagram/download?url=${encodeURIComponent(url)}`);
-//       const blob = await response.blob();
-//       const downloadUrl = window.URL.createObjectURL(blob);
-      
-//       const a = document.createElement('a');
-//       a.href = downloadUrl;
-//       a.download = filename;
-//       document.body.appendChild(a);
-//       a.click();
-//       window.URL.revokeObjectURL(downloadUrl);
-//       document.body.removeChild(a);
-//     } catch (error) {
-//       toast.error("Failed to download media");
-//     }
-//   };
-
-// export const instagramService = { searchInstagramVideo, downloadMedia }
 
 // src/adapters/instagram.ts
 import { toast } from "sonner";
@@ -58,33 +21,43 @@ const searchInstagramVideo = async (url: string): Promise<InstagramPostResponse>
 const downloadMedia = async (url: string, mediaIndex: number = 0): Promise<void> => {
   try {
     const response = await ApiNoAuth.get("/instagram/download", {
-      params: {
-        url,
-        media_index: mediaIndex
-      },
-      responseType: "blob"
+      params: { url, media_index: mediaIndex },
+      responseType: "blob",
     });
 
     const contentDisposition = response.headers["content-disposition"];
-    const filename = contentDisposition
-      ? contentDisposition.split("filename=")[1]
-      : `instagram_media_${Date.now()}.${mediaIndex === 0 ? "mp4" : "jpg"}`;
+    let filename = contentDisposition
+      ? contentDisposition.split("filename=")[1].replace(/"/g, "")
+      : `instagram_media_${Date.now()}`;
 
+    // Determine correct file extension based on Content-Type header
+    const contentType = response.headers["content-type"];
+    let fileExtension = "mp4"; // Default to mp4
+
+    if (contentType.includes("image")) {
+      fileExtension = "jpg"; // Handle images correctly
+    }
+
+    filename = filename.includes(".") ? filename : `${filename}.${fileExtension}`;
+
+    // Create download link
     const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
     const link = document.createElement("a");
     link.href = downloadUrl;
     link.setAttribute("download", filename);
     document.body.appendChild(link);
     link.click();
-    link.remove();
+    document.body.removeChild(link);
     window.URL.revokeObjectURL(downloadUrl);
+
+    toast.success("Download started successfully!");
   } catch (error: any) {
-    toast.error(error.response?.data?.detail || "Download failed");
-    throw new Error(error.response?.data?.detail || "Media download failed");
+    console.error("Download Error:", error);
+    toast.error(error.response?.data?.detail || "Failed to download media.");
   }
 };
-
 export const instagramService = {
   searchInstagramVideo,
-  downloadMedia
+  downloadMedia,
 };
+
