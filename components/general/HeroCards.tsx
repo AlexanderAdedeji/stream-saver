@@ -1,4 +1,3 @@
-
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -10,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Check, Linkedin } from "lucide-react";
 import { LightBulbIcon } from "./Icons";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { GitHubLogoIcon, InstagramLogoIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -20,20 +19,28 @@ export const HeroCards = () => {
   return (
     <div className="hidden lg:flex flex-row flex-wrap gap-8 relative w-[700px] h-[500px]">
       {/* Testimonial */}
-      <Card className="absolute w-[340px] -top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      <Card className="absolute w-[340px] -top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10 ">
         <CardHeader className="flex flex-row items-center gap-4 pb-2">
           <Avatar>
-            <AvatarImage alt="" src="https://github.com/shadcn.png" />
+            <AvatarImage
+              alt="User Testimonial"
+              src="https://github.com/shadcn.png"
+            />
             <AvatarFallback>SH</AvatarFallback>
           </Avatar>
 
           <div className="flex flex-col">
-            <CardTitle className="text-lg">John Doe React</CardTitle>
-            <CardDescription>@john_doe</CardDescription>
+            <CardTitle className="text-lg">Alex Johnson</CardTitle>
+            <CardDescription>@alex_johnson</CardDescription>
           </div>
         </CardHeader>
 
-        <CardContent>This landig page is awesome!</CardContent>
+        <CardContent>
+          {" "}
+          <p>
+          StreamSaver is the best—fast, simple, ad-free. Love it!
+          </p>
+        </CardContent>
       </Card>
 
       {/* Team */}
@@ -46,34 +53,32 @@ export const HeroCards = () => {
             height={100}
             className="absolute grayscale-[0%] -top-12 rounded-full w-24 h-24 aspect-square object-cover"
           />
-          <CardTitle className="text-center">Leo Miranda</CardTitle>
+          <CardTitle className="text-center">Jane Doe</CardTitle>
           <CardDescription className="font-normal text-primary">
-            Frontend Developer
+            Instagram Influencer
           </CardDescription>
         </CardHeader>
 
         <CardContent className="text-center pb-2">
           <p>
-            I really enjoy transforming ideas into functional software that
-            exceeds expectations
-          </p>
+          I StreamSave first, then repurpose for jaw-dropping influencer content.          </p>
         </CardContent>
 
         <CardFooter>
           <div>
             <Link
-              href="https://github.com/leoMirandaa"
+              href=""
               target="_blank"
               className={buttonVariants({
                 variant: "ghost",
                 size: "sm",
               })}
             >
-              <span className="sr-only">Github icon</span>
-              <GitHubLogoIcon className="w-5 h-5" />
+              <span className="sr-only">Instagram icon</span>
+              <InstagramLogoIcon className="w-5 h-5" />
             </Link>
             <Link
-              href="https://twitter.com/leo_mirand4"
+              href=""
               target="_blank"
               className={buttonVariants({
                 variant: "ghost",
@@ -122,7 +127,8 @@ export const HeroCards = () => {
           </div>
 
           <CardDescription>
-            Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.
+         No sign-up required. Just paste the link and
+          save your content instantly.
           </CardDescription>
         </CardHeader>
 
@@ -134,7 +140,7 @@ export const HeroCards = () => {
 
         <CardFooter className="flex">
           <div className="space-y-4">
-            {["4 Team member", "4 GB Storage", "Upto 6 pages"].map(
+            {["Unlimited Downloads", "No Hidden Fees", "Multiple Downloads"].map(
               (benefit: string) => (
                 <span key={benefit} className="flex">
                   <Check className="text-green-500" />{" "}
@@ -155,8 +161,7 @@ export const HeroCards = () => {
           <div>
             <CardTitle>Light & dark mode</CardTitle>
             <CardDescription className="text-md mt-2">
-              Lorem ipsum dolor sit amet consect adipisicing elit. Consectetur
-              natusm.
+            Toggle light & dark themes effortlessly for personalized, eye-friendly viewing day or night
             </CardDescription>
           </div>
         </CardHeader>
