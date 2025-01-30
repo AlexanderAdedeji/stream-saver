@@ -2,9 +2,9 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "StreamSave",
-  title: "Stream Save",
+  title: "StreamSaver | Download Videos from Instagram & YouTube",
   description:
-    "Stream Save is a startup that allows you to use to download videos from youtube, facebook, instagram and whatsapp",
+    "Easily download videos & images from your favorite social media platforms with StreamSaver!",
   mainNav: [
     {
       title: "Pricing",
