@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+
 import {
   Facebook,
   Search,
@@ -19,6 +19,7 @@ import {
   ScanLine,
 } from "lucide-react";
 import PlatformHero from "@/components/general/PlatformHero";
+import Image from "next/image";
 interface FacebookContent {
   type: "video" | "reel";
   title: string;
@@ -143,7 +144,7 @@ const FacebookPage =() => {
                 {/* Content Preview */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="relative">
-                    <img
+                    <Image
                       src={content.thumbnail}
                       alt={content.title}
                       className="w-full h-48 object-cover rounded-lg"
@@ -162,7 +163,7 @@ const FacebookPage =() => {
                   </div>
                   <div>
                     <div className="flex items-center gap-3 mb-4">
-                      <img
+                      <Image
                         src={content.author.avatar}
                         alt={content.author.name}
                         className="w-10 h-10 rounded-full"

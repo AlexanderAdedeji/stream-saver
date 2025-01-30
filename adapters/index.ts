@@ -1,5 +1,5 @@
 // import useStore from '@/store';
-import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
 // export const baseURL =
 //   import.meta.env.VITE_USE_PROXY === 'true'

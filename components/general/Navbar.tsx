@@ -22,10 +22,10 @@ export const Navbar = () => {
       <NavigationMenu className="mx-auto">
         <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between ">
           <NavigationMenuItem className="font-bold flex">
-            <a href="/" className="ml-2 font-bold text-xl flex">
+            <Link href="/" className="ml-2 font-bold text-xl flex">
               <LogoIcon />
               <span className="hidden md:block">{title}</span>
-            </a>
+            </Link>
           </NavigationMenuItem>
 
           {/* mobile */}

@@ -202,7 +202,7 @@ const YoutubePage = () => {
               <div className="p-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="relative">
-                    <img
+                    <Image
                       src={videoInfo.thumbnail}
                       alt={videoInfo.title}
                       className="w-full h-48 object-cover rounded-lg"
@@ -439,7 +439,7 @@ const YoutubePage = () => {
                   key={item.id}
                   className="bg-white rounded-lg p-4 flex items-center gap-4"
                 >
-                  <img
+                  <Image
                     src={item.thumbnail}
                     alt={item.title}
                     className="w-16 h-16 object-cover rounded"
