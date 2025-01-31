@@ -38,6 +38,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.mjs"
-, "merge.js"  ],
+, "merge.ts"  ],
   "exclude": ["node_modules"]
 }
