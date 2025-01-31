@@ -24,7 +24,7 @@ export const Navbar = () => {
           <NavigationMenuItem className="font-bold flex">
             <Link href="/" className="ml-2 font-bold text-xl flex">
               <LogoIcon />
-              <span className="hidden md:block">{title}</span>
+              <span className="hidden md:block">{"Stream Saver"}</span>
             </Link>
           </NavigationMenuItem>
 
@@ -55,7 +55,7 @@ export const Navbar = () => {
               target="_blank"
               className={`border ${buttonVariants({ variant: "secondary" })}`}
             >
-              <GitHubLogoIcon className="mr-2 w-5 h-5" />
+              {/* <GitHubLogoIcon className="mr-2 w-5 h-5" /> */}
             Get Started
             </Link>
 

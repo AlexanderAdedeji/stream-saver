@@ -30,7 +30,7 @@ export const Hero = () => {
           <Button className="w-full md:w-1/3">Get Started</Button>
 
           <Link
-            href="#how-it-works"
+            href="#howItWorks"
             className={`w-full md:w-1/3 ${buttonVariants({
               variant: "outline",
             })}`}

@@ -3,7 +3,7 @@ import { ApiNoAuth } from "..";
 // Function to track visits
 const trackVisits = async () => {
   try {
-    const response = await ApiNoAuth.post(`/analytics/track-visit`, {
+    const response = await ApiNoAuth.post(`/analytics/track-visit`,{}, {
       headers: {
         "Content-Type": "application/json",
         "User-Agent": navigator.userAgent || "Unknown",
