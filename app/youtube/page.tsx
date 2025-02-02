@@ -20,7 +20,10 @@ interface VideoMetadata {
   views: string;
   publishDate: string;
   likes: string;
-  qualities: { quality: string; format: string; size: string }[];
+  formats: { resolution: string; width: number; height: number,    ext: string,
+    filesize: string| null,
+    fps: number,
+ }[];
 }
 
 interface DownloadHistory {
@@ -50,9 +53,9 @@ const YoutubePage = () => {
 
   // Function to get best available quality
   const getBestAvailableQuality = (requestedQuality: string) => {
-    if (!videoInfo?.qualities.length) return null;
+    if (!videoInfo?.formats.length) return null;
     
-    const availableQualities = videoInfo.qualities.map(q => q.quality);
+    const availableQualities = videoInfo.formats.map(q => q.resolution);
     return availableQualities.includes(requestedQuality)
       ? requestedQuality
       : availableQualities[0]; // Pick highest available quality
@@ -169,14 +172,14 @@ const YoutubePage = () => {
               <div className="mt-6">
                 <h3 className="font-medium text-gray-900 mb-4">Select Quality:</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {videoInfo.qualities.map((quality) => (
-                    <label key={quality.quality} className={`flex items-center justify-between p-4 rounded-lg border cursor-pointer transition-colors ${selectedQuality === quality.quality ? "border-red-500 bg-red-50" : "border-gray-200 hover:border-red-200"}`}>
+                  {videoInfo.formats.map((quality) => (
+                    <label key={quality.resolution} className={`flex items-center justify-between p-4 rounded-lg border cursor-pointer transition-colors ${selectedQuality === quality.resolution ? "border-red-500 bg-red-50" : "border-gray-200 hover:border-red-200"}`}>
                       <div className="flex items-center">
-                        <input type="radio" name="quality" value={quality.quality} checked={selectedQuality === quality.quality} onChange={(e) => setSelectedQuality(e.target.value)} className="sr-only" />
-                        <span className="font-medium">{quality.quality}</span>
-                        <span className="ml-2 text-sm text-gray-500">({quality.format})</span>
+                        <input type="radio" name="quality" value={quality.resolution} checked={selectedQuality === quality.resolution} onChange={(e) => setSelectedQuality(e.target.value)} className="sr-only" />
+                        <span className="font-medium">{quality.resolution}</span>
+                        <span className="ml-2 text-sm text-gray-500">({quality.resolution})</span>
                       </div>
-                      <span className="text-sm text-gray-500">{quality.size}</span>
+                      <span className="text-sm text-gray-500">{quality.filesize}</span>
                     </label>
                   ))}
                 </div>
