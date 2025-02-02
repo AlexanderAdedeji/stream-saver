@@ -63,6 +63,7 @@ export default function RootLayout({
     <TanstackProvider>
       <html lang="en" suppressHydrationWarning>
       <Head>
+      <link rel="manifest" href="/manifest.json" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
