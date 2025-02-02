@@ -10,6 +10,8 @@ import { TanstackProvider } from "@/components/providers/tanstack-provider";
 import { Navbar } from "@/components/general/Navbar";
 import { Footer } from "@/components/general/Footer";
 import { ScrollToTop } from "@/components/general/ScrollToTop";
+import { Toast } from "@/components/ui/toast";
+import { Toaster } from "@/components/ui/sonner";
 
 const { title, description } = siteConfig;
 export const metadata: Metadata = {
@@ -80,6 +82,8 @@ export default function RootLayout({
               <Footer />
               <ScrollToTop />
             </div>
+
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>

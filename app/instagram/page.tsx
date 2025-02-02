@@ -61,7 +61,7 @@ const InstagramPage = () => {
   const handleDownloadCurrent = async () => {
     if (!postInfo) return;
 
-    setDownloadingCurrent(true); // Show loader for current
+    setDownloadingCurrent(true);
     try {
       await instagramService.downloadMedia(url, activeSlide);
       toast.success("Current media downloaded successfully!");
@@ -75,7 +75,7 @@ const InstagramPage = () => {
   const handleDownloadAll = async () => {
     if (!postInfo) return;
 
-    setDownloadingAll(true); // Show loader for all
+    setDownloadingAll(true);
     try {
       for (const [index] of postInfo.media.entries()) {
         await instagramService.downloadMedia(url, index);
@@ -192,7 +192,7 @@ const InstagramPage = () => {
                   />
                 )}
               </div>
-              <div className="mt-6 border-t pt-6">
+              <div className="mt-6 border-t pt-6 px-6">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-medium text-gray-900">
                       Watermark Removal
@@ -310,7 +310,7 @@ const InstagramPage = () => {
                     </div>
                   )}
                 </div>
-              <div className="p-6">
+              <div className="px-6 py-2">
                 <h3 className="font-medium text-gray-900 mb-4">
                   Download Options:
                 </h3>
@@ -318,11 +318,11 @@ const InstagramPage = () => {
                   <button
                     onClick={handleDownloadAll}
                     className={`w-full px-6 py-3 flex items-center justify-center gap-2 rounded-lg ${
-                      downloadingAll
+                      downloadingAll || downloadingCurrent
                         ? "bg-gray-400 cursor-not-allowed"
                         : "bg-pink-600 text-white hover:bg-pink-700"
                     }`}
-                    disabled={downloadingAll}
+                    disabled={downloadingAll || downloadingCurrent}
                   >
                     {downloadingAll ? <Loader2 className="animate-spin" /> : <Download />}
                     Download All Media
@@ -330,11 +330,11 @@ const InstagramPage = () => {
                   <button
                     onClick={handleDownloadCurrent}
                     className={`w-full px-6 py-3 flex items-center justify-center gap-2 rounded-lg ${
-                      downloadingCurrent
+                      downloadingCurrent || downloadingAll
                         ? "bg-gray-400 cursor-not-allowed"
                         : "bg-pink-600 text-white hover:bg-pink-700"
                     }`}
-                    disabled={downloadingCurrent}
+                    disabled={downloadingCurrent || downloadingAll}
                   >
                     {downloadingCurrent ? <Loader2 className="animate-spin" /> : <Download />}
                     Download Current Media

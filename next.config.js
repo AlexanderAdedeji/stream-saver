@@ -15,6 +15,14 @@ module.exports = {
         port: "",
         pathname: "/**",
       },
+
+      {
+        protocol: "https",
+        hostname: "scontent-sea1-1.cdninstagram.com",
+        port: "",
+        pathname: "/**",
+      },
+
       {
         protocol: "https",
         hostname: "instagram.fyvr4-1.fna.fbcdn.net",
